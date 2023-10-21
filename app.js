@@ -1,16 +1,14 @@
 const express = require("express");
-const db = require("./config/db");
+const cors = require("cors");
+const connectDB = require("./config/db");
 const routes = require("./routes/index");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-db.then(() => {
-  console.log("Connected to MongoDB");
-}).catch((err) => {
-  console.log("Error connecting to MongoDB");
-});
+connectDB();
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
